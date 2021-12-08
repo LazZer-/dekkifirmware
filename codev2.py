@@ -7,6 +7,7 @@ from adafruit_hid.keycode import Keycode
 
 kbd = Keyboard(usb_hid.devices)
 
+# unused cuz can't see led
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
