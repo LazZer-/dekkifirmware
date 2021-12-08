@@ -2,12 +2,14 @@ import board
 import keypad
 import usb_hid
 import digitalio
+import time
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 
+# Initializing keyboard, led, pins
+
 kbd = Keyboard(usb_hid.devices)
 
-# unused cuz can't see led
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
@@ -26,6 +28,8 @@ KEY_PINS = (
     board.GP21,
 )
 
+# Directory for pairing event numbers with keys
+
 BOTONS = {
     0: Keycode.F13,
     1: Keycode.F17,
@@ -40,8 +44,22 @@ BOTONS = {
     10: Keycode.F20,
     11: Keycode.F16,
 }
-    
+
+# Initializing keypad
+
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
+
+# Blink led to confirm initialization, then keep it on
+
+led.value = True
+time.sleep(0.3)
+led.value = False
+time.sleep(0.2)
+led.value = True
+time.sleep(0.3)
+led.value = False
+time.sleep(0.2)
+led.value = True
 
 while True:
     event = keys.events.get()
