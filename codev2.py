@@ -61,16 +61,14 @@ led.value = False
 time.sleep(0.2)
 led.value = True
 
+# Check which keys are being pressed
+
 while True:
     event = keys.events.get()
     if event:
-        # A key transition occurred.
 
         if event.pressed:
-            # Turn the key blue when pressed
             kbd.press(BOTONS[event.key_number])
 
-        # This could just be else:,
-        # since event.pressed and event.released are opposites.
         if event.released:
             kbd.release(BOTONS[event.key_number])
