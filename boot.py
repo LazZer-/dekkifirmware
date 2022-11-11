@@ -1,7 +1,12 @@
+# this is a sort of devmode, if you press two buttons during boot,
+# you can access the files on the pico, otherwise it won't show up
+# as a flash drive
 import board
 import time
 import digitalio
 import storage
+
+# defining pins to buttons
 
 b1p = board.GP10
 b10p = board.GP19
@@ -16,6 +21,8 @@ b10.pull = digitalio.Pull.UP
 
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
+
+# check if the button combo is pressed
 
 if b1.value and b10.value:
     storage.disable_usb_drive()
